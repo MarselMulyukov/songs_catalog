@@ -1,5 +1,6 @@
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils import timezone
 
 
 class MusicPerformer(models.Model):
@@ -10,6 +11,7 @@ class MusicPerformer(models.Model):
     )
 
     class Meta:
+        ordering = ('name',)
         verbose_name = 'Музыкальный исполнитель'
         verbose_name_plural = 'Музыкальные исполнители'
 
@@ -26,10 +28,15 @@ class Album(models.Model):
     music_performer = models.ForeignKey(
         MusicPerformer,
         verbose_name='Музыкальный исполнитель',
+        related_name= 'albums',
         on_delete=models.CASCADE
     )
-    release_year = models.DateField(
-        verbose_name='Год выпуска'
+    release_year = models.PositiveIntegerField(
+        verbose_name='Год выхода',
+        validators = (
+            MinValueValidator(1950),
+            MaxValueValidator(timezone.now().year)
+        )
     )
 
     class Meta:
@@ -48,7 +55,7 @@ class Song(models.Model):
     albums = models.ManyToManyField(
         Album,
         verbose_name='Альбомы',
-        through=AlbumSongs
+        through='AlbumSongs'
     )
 
     class Meta:
@@ -74,7 +81,10 @@ class AlbumSongs(models.Model):
     )
     serial_number = models.PositiveSmallIntegerField(
         verbose_name='Порядковый номер',
-        validators=(MaxValueValidator(30))
+        validators=(
+            MinValueValidator(1),
+            MaxValueValidator(30),
+        )
     )
 
     class Meta:
