@@ -4,16 +4,18 @@ from rest_framework import serializers
 
 class AlbumSongsSerializer(serializers.ModelSerializer):
     song = serializers.StringRelatedField()
+
     class Meta:
         model = AlbumSongs
         fields = (
             'serial_number',
-            'song'            
+            'song'
         )
 
 
 class AllAlbumsSerializer(serializers.ModelSerializer):
     music_performer = serializers.StringRelatedField()
+
     class Meta:
         model = Album
         fields = (
@@ -27,6 +29,7 @@ class AllAlbumsSerializer(serializers.ModelSerializer):
 class AlbumSerializer(serializers.ModelSerializer):
     album_songs = AlbumSongsSerializer(many=True)
     music_performer = serializers.StringRelatedField()
+
     class Meta:
         model = Album
         fields = (
@@ -38,7 +41,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         )
 
 
-class AllPerformersAlbumsSerializer(serializers.ModelSerializer):
+class PerformersAlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = (
@@ -49,7 +52,8 @@ class AllPerformersAlbumsSerializer(serializers.ModelSerializer):
 
 
 class PerformerSerializer(serializers.ModelSerializer):
-    albums = AllPerformersAlbumsSerializer(many=True)
+    albums = PerformersAlbumSerializer(many=True)
+
     class Meta:
         model = MusicPerformer
         fields = (

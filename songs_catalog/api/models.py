@@ -28,12 +28,12 @@ class Album(models.Model):
     music_performer = models.ForeignKey(
         MusicPerformer,
         verbose_name='Музыкальный исполнитель',
-        related_name= 'albums',
+        related_name='albums',
         on_delete=models.CASCADE
     )
     release_year = models.PositiveIntegerField(
         verbose_name='Год выхода',
-        validators = (
+        validators=(
             MinValueValidator(1950),
             MaxValueValidator(timezone.now().year)
         )

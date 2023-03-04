@@ -19,7 +19,11 @@ class AlbumViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
             return AlbumSerializer
 
 
-class MusicPerformerViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
+class MusicPerformerViewSet(
+    ListModelMixin,
+    RetrieveModelMixin,
+    GenericViewSet
+):
     queryset = MusicPerformer.objects.all()
 
     def get_serializer_class(self):

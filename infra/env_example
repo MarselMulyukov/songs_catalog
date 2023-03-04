@@ -1,0 +1,8 @@
+SECRET_KEY='django-insecure-o6j48__v%h264$a(c-w=3vyb13_!%n#7^=^m@g++0nk9#-mmh3'
+DEBUG=False
+DB_ENGINE=django.db.backends.postgresql
+POSTGRES_DB=songs_catalog
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST='127.0.0.1'
+DB_PORT=5432

@@ -1,15 +1,13 @@
 from django.contrib import admin
 from .models import Album, AlbumSongs, MusicPerformer, Song
 
+
 class SongsInline(admin.TabularInline):
     model = AlbumSongs
-    extra = 1
-    model.__str__ = lambda self: ""
 
 
 class AlbumInline(admin.TabularInline):
     model = Album
-
 
 
 class AlbumAdmin(admin.ModelAdmin):
